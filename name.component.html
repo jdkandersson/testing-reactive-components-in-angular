@@ -1,4 +1,4 @@
 <!-- name.component.html -->
-<ng-container *ngIf="nameService.name$ | async as name">
+<ng-container *ngIf="nameService.name$() | async as name">
   {{ name }}
 </ng-container>
