@@ -1,19 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 
 import { NameService } from './name.service';
 import { NameComponent } from './name.component';
 
 describe('NameComponent', () => {
-  let nameBehaviorSubject: BehaviorSubject<string>;
   let nameServiceSpy: jasmine.SpyObj<NameService>;
   let component: NameComponent;
   let fixture: ComponentFixture<NameComponent>;
 
   beforeEach(() => {
-    nameBehaviorSubject = new BehaviorSubject(null);
-    nameServiceSpy = jasmine.createSpyObj('NameService', ['loadName']);
-    (nameServiceSpy as any).name$ = nameBehaviorSubject.asObservable();
+    nameServiceSpy = jasmine.createSpyObj('NameService', ['loadName', 'get']);
 
     TestBed.configureTestingModule({
       declarations: [ NameComponent ],
@@ -38,7 +35,7 @@ describe('NameComponent', () => {
 
   it('should display NameService name', () => {
     // Setting name in service
-    nameBehaviorSubject.next('the name');
+    nameServiceSpy.get.and.returnValue(of('the name'));
 
     fixture.detectChanges();
 
