@@ -10,7 +10,7 @@ describe('NameComponent', () => {
   let fixture: ComponentFixture<NameComponent>;
 
   beforeEach(() => {
-    nameServiceSpy = jasmine.createSpyObj('NameService', ['loadName', 'get']);
+    nameServiceSpy = jasmine.createSpyObj('NameService', ['loadName', 'name$']);
 
     TestBed.configureTestingModule({
       declarations: [ NameComponent ],
@@ -35,7 +35,7 @@ describe('NameComponent', () => {
 
   it('should display NameService name', () => {
     // Setting name in service
-    nameServiceSpy.get.and.returnValue(of('the name'));
+    nameServiceSpy.name$.and.returnValue(of('the name'));
 
     fixture.detectChanges();
 
